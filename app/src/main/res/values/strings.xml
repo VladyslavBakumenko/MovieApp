@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Movie rating</string>
+
+    <string name="navigation_drawer_item_favorite">Favorite</string>
+    <string name="navigation_drawer_item_watchlist">Watchlist</string>
+    <string name="navigation_drawer_item_exit">Exit</string>
+
+    <string name="something_went_wrong_text">Something went wrong</string>
+    <string name="username_text">Username</string>
+    <string name="password_text">Password</string>
+    <string name="login_text">Login</string>
+    <string name="continue_without_login_text">Continue without login</string>
+    <string name="popular_text">Popular</string>
+    <string name="top_rated_text">Top rated</string>
+    <string name="top_upcoming_text">Upcoming</string>
+    <string name="all_text">All</string>
+    <string name="search_movie_text">Search movie</string>
+    <string name="biography_text">Biography</string>
+    <string name="acting_text">Acting</string>
+
+</resources>
