@@ -27,7 +27,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -99,9 +98,9 @@ fun SearchMovieTextField(
             .fillMaxWidth()
             .padding(paddingValues)
             .padding(horizontal = 16.dp),
-        value = TextFieldValue(textFieldState),
+        value = textFieldState,
         onValueChange = {
-            textListener(it.text)
+            textListener(it)
         },
         leadingIcon = {
             Icon(
