@@ -1,10 +1,11 @@
 package com.example.movierating.domain.network.paging
 
+import android.R.attr.data
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.movierating.data.restModels.Movie
 import com.example.movierating.data.restModels.MovieListResponse
-import com.example.movierating.domain.network.apiRepositories.movesRequests.MovieApiService
+import com.example.movierating.domain.network.apiRepository.MovieApiService
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -28,9 +29,9 @@ class MoviePagingSource @AssistedInject constructor(
             val page = params.key ?: 1
             val response = getResponse(page)
             LoadResult.Page(
-                data = response?.results!!,
+                data = response?.results.orEmpty(),
                 prevKey = if (page == 1) null else page.minus(1),
-                nextKey = if (response.results.isEmpty()) null else page.plus(1),
+                nextKey = if (response?.results?.isEmpty() == true) null else page.plus(1),
             )
         } catch (e: Exception) {
             LoadResult.Error(e)

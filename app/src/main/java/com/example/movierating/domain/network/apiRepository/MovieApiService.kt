@@ -1,4 +1,4 @@
-package com.example.movierating.domain.network.apiRepositories.movesRequests
+package com.example.movierating.domain.network.apiRepository
 
 import com.example.movierating.data.restModels.MovieListResponse
 import com.example.movierating.data.restModels.movieCreditsResponse.MovieCreditsResponse

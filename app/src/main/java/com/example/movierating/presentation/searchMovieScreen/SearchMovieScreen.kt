@@ -1,4 +1,4 @@
-package com.example.movierating.presentation.utils
+package com.example.movierating.presentation.searchMovieScreen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,11 +29,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.movierating.R
 import com.example.movierating.data.restModels.Movie
 import com.example.movierating.presentation.allMoviesListScreen.AllMoviesListScreen
-import com.example.movierating.presentation.searchMovieScreen.SearchMovieScreenViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

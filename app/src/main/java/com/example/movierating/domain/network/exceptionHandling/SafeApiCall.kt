@@ -1,9 +1,9 @@
-import com.example.movierating.domain.network.exceptionHendling.AppException
-import com.example.movierating.domain.network.exceptionHendling.ClientException
-import com.example.movierating.domain.network.exceptionHendling.NetworkException
-import com.example.movierating.domain.network.exceptionHendling.SallyResponseResource
-import com.example.movierating.domain.network.exceptionHendling.ServerException
-import com.example.movierating.domain.network.exceptionHendling.UnknownException
+import com.example.movierating.domain.network.exceptionHandling.AppException
+import com.example.movierating.domain.network.exceptionHandling.ClientException
+import com.example.movierating.domain.network.exceptionHandling.NetworkException
+import com.example.movierating.domain.network.exceptionHandling.SallyResponseResource
+import com.example.movierating.domain.network.exceptionHandling.ServerException
+import com.example.movierating.domain.network.exceptionHandling.UnknownException
 import com.example.movierating.domain.utils.CLIENT_ERROR
 import com.example.movierating.domain.utils.HTTP_UNKNOWN_ERROR
 import com.example.movierating.domain.utils.NETWORK_ERROR

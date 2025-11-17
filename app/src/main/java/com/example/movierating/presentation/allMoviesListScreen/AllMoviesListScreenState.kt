@@ -4,11 +4,11 @@ import androidx.paging.PagingData
 import com.example.movierating.data.restModels.Movie
 import kotlinx.coroutines.flow.Flow
 
-data class AllMoviesListScreenState(val popularMovieFlow: Flow<PagingData<Movie>>) {
+data class AllMoviesListScreenState(val movieFlow: Flow<PagingData<Movie>>) {
 
     companion object {
-        fun getInstance(popularMovieFlow: Flow<PagingData<Movie>>): AllMoviesListScreenState {
-            return AllMoviesListScreenState(popularMovieFlow)
+        fun getInstance(movieFlow: Flow<PagingData<Movie>>): AllMoviesListScreenState {
+            return AllMoviesListScreenState(movieFlow)
         }
     }
 }

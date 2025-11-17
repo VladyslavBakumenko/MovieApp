@@ -2,7 +2,7 @@ package com.example.movierating.presentation.movieDetailsScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movierating.domain.network.exceptionHendling.SallyResponseResource
+import com.example.movierating.domain.network.exceptionHandling.SallyResponseResource
 import com.example.movierating.domain.network.paging.MoviePagingSourceRequestType
 import com.example.movierating.domain.network.usecases.GetMovieCreditsUseCase
 import com.example.movierating.domain.network.usecases.GetMoviePagingDataFlowUseCase
@@ -51,7 +51,7 @@ class MovieDetailsScreenViewModel @Inject constructor(
 
                     is SallyResponseResource.Success -> {
                         _state.update { prevState ->
-                            prevState.copy(movieVideoData = it.data.body()?.results!!)
+                            prevState.copy(movieVideoData = it.data.body()?.results.orEmpty())
                         }
                     }
                 }

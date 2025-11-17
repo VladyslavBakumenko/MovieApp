@@ -25,7 +25,6 @@ class DataStoreRepositoryImpl @Inject constructor(
         context.dataStore.edit { preferences ->
             preferences[preferencesKey] = value
         }
-        Log.e("TAG", "putString: $preferencesKey")
     }
 
     override suspend fun putInt(key: String, value: Int) {
@@ -39,7 +38,6 @@ class DataStoreRepositoryImpl @Inject constructor(
         return try {
             val preferencesKey = stringPreferencesKey(key)
             val preferences = context.dataStore.data.first()
-            Log.e("TAG", "getString: $preferencesKey - ${preferences[preferencesKey]}")
             preferences[preferencesKey]
         } catch (e: Exception) {
             e.printStackTrace()

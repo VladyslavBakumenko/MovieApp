@@ -1,5 +1,6 @@
 package com.example.movierating.domain.di.network
 
+import com.example.movierating.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,6 +10,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -23,7 +25,7 @@ class RetrofitModule {
     @Provides
     fun provideMainOkHttp(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor)
-            .addInterceptor(ApiKeyInterceptor(API_KEY)).build()
+            .addInterceptor(ApiKeyInterceptor(BuildConfig.API_KEY)).build()
     }
 
     @Provides
@@ -38,6 +40,5 @@ class RetrofitModule {
 
     companion object {
         const val BASE_URL = "https://api.themoviedb.org"
-        const val API_KEY = "dde60d5a51c393a90552aecde67b7d4b"
     }
 }

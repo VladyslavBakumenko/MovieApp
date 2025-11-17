@@ -10,10 +10,6 @@ sealed class Screen(val route: String) {
 
     object MovieScreen : Screen(ROUTE_MOVIE_SCREEN)
 
-    object FavoriteMoviesScreen : Screen(ROUTE_FAVORITE_MOVIES_SCREEN)
-
-    object WatchlistMoviesScreen : Screen(ROUTE_WATCHLIST_MOVIES_SCREEN)
-
     object MovieDetailsScreen : Screen(ROUTE_MOVIE_DETAILS) {
 
         private const val ROUTE_FOR_ARGS = "movie_details"
@@ -50,8 +46,6 @@ sealed class Screen(val route: String) {
         const val KEY_MOVIE_PAGING_SOURCE_REQUEST_TYPE = "movie_paging_source_request_type"
 
         const val ROUTE_MOVIE_SCREEN = "route_movie_screen"
-        const val ROUTE_FAVORITE_MOVIES_SCREEN = "route_favorite_movie_screen"
-        const val ROUTE_WATCHLIST_MOVIES_SCREEN = "route_watchlist_movie_screen"
         const val ROUTE_MOVIE_DETAILS = "movie_details/{$KEY_MOVIE}"
         const val ROUTE_ACTOR_DETAILS = "actor_details/{$KEY_ACTOR}"
         const val ROUTE_ALL_MOVIES_LIST_SCREEN =
