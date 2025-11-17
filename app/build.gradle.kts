@@ -98,14 +98,11 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4")
 
     // paging
+    implementation("androidx.paging:paging-runtime-ktx:3.3.6")
     implementation("androidx.paging:paging-compose:3.3.6")
 
     // coil
     implementation("io.coil-kt:coil-compose:2.7.0")
-
-    // jetpack navigation
-    implementation("androidx.paging:paging-runtime-ktx:3.3.6")
-    implementation("androidx.paging:paging-compose:3.3.6")
 }
 
 //Allow references to generated code
