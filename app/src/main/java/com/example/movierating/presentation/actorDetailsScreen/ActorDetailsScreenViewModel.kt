@@ -35,7 +35,9 @@ class ActorDetailsScreenViewModel @Inject constructor(
 
                     is SallyResponseResource.Success -> {
                         _state.update { previousState ->
-                            previousState.copy(profileImageInfoList = it.data.body()?.profiles!!)
+                            previousState.copy(
+                                profileImageInfoList = it.data.body()?.profiles.orEmpty()
+                            )
                         }
                     }
                 }
