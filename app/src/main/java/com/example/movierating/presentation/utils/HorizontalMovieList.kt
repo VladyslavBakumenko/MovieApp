@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -23,6 +24,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
@@ -43,19 +45,25 @@ fun PagingHorizontalMovieList(
     startMovieDetailsListener: (movie: Movie) -> Unit
 ) {
     val movieList = moviePagingState.collectAsLazyPagingItems()
-    LazyRow {
-        items(
-            count = movieList.itemCount,
-            key = movieList.itemKey(),
-            contentType = movieList.itemContentType()
-        ) { index ->
-            movieList[index]?.let {
-                MovieActorItem(
-                    it,
-                    getPaddingValuesForLazyRowItems(index, movieList.itemCount),
-                    rowItemNameTextColor
-                ) { movie ->
-                    startMovieDetailsListener(movie)
+    val isInitialLoading = movieList.loadState.refresh is LoadState.Loading
+
+    if (isInitialLoading) {
+        MoviesHorizontalSkeleton()
+    } else {
+        LazyRow {
+            items(
+                count = movieList.itemCount,
+                key = movieList.itemKey(),
+                contentType = movieList.itemContentType()
+            ) { index ->
+                movieList[index]?.let {
+                    MovieActorItem(
+                        it,
+                        getPaddingValuesForLazyRowItems(index, movieList.itemCount),
+                        rowItemNameTextColor
+                    ) { movie ->
+                        startMovieDetailsListener(movie)
+                    }
                 }
             }
         }
@@ -97,6 +105,50 @@ fun <T> HorizontalMoviesOrActorList(
             }
         }
     })
+}
+
+
+@Composable
+fun MoviesHorizontalSkeleton(
+    placeholderCount: Int = 5
+) {
+    val items = remember(placeholderCount) { List(placeholderCount) { it } }
+    LazyRow {
+        items(items) { index ->
+            MoviePosterSkeleton(
+                paddingValues = getPaddingValuesForLazyRowItems(index, items.size)
+            )
+        }
+    }
+}
+
+@Composable
+fun MoviePosterSkeleton(
+    modifier: Modifier = Modifier,
+    paddingValues: PaddingValues = PaddingValues(horizontal = 16.dp),
+    showTitlePlaceholder: Boolean = true
+) {
+    Column(
+        modifier = modifier
+            .padding(paddingValues),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Box(
+            modifier = Modifier
+                .width(140.dp)
+                .height(210.dp)
+                .background(shimmerBrush())
+        )
+        if (showTitlePlaceholder) {
+            Spacer(Modifier.size(8.dp))
+            Box(
+                modifier = Modifier
+                    .width(100.dp)
+                    .height(16.dp)
+                    .background(shimmerBrush())
+            )
+        }
+    }
 }
 
 

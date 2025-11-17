@@ -2,7 +2,9 @@ package com.example.movierating.domain.network.apiRepositories.movesRequests
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import asSallyResponseResourceFlow
+import com.example.movierating.data.restModels.Movie
 import com.example.movierating.data.restModels.movieCreditsResponse.MovieCreditsResponse
 import com.example.movierating.data.restModels.movieVideoDataResponse.MovieVideoDataResponse
 import com.example.movierating.data.restModels.personDetailsResponse.PersonDetailsResponse
@@ -15,19 +17,25 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 import javax.inject.Inject
 
-class MovieApiRepositoryImpl @Inject constructor(private val movieApiService: MovieApiService) :
-    MovieApiRepository {
+class MovieApiRepositoryImpl @Inject constructor(
+    private val movieApiService: MovieApiService,
+    private val moviePagingSourceFactory: MoviePagingSource.Factory
+) : MovieApiRepository {
 
     override fun getMoviesPagingDataFlow(
         moviePagingSourceRequestType: MoviePagingSourceRequestType,
         searchedMovieText: String?,
         movieId: Int?
-    ) = Pager(
+    ): Flow<PagingData<Movie>> = Pager(
         config = PagingConfig(
             pageSize = 20,
         ),
         pagingSourceFactory = {
-            MoviePagingSource(movieApiService, moviePagingSourceRequestType, searchedMovieText, movieId)
+            moviePagingSourceFactory.create(
+                moviePagingSourceRequestType = moviePagingSourceRequestType,
+                searchedMovieText = searchedMovieText,
+                movieId = movieId
+            )
         }
     ).flow
 

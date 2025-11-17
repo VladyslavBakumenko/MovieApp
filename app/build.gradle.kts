@@ -1,3 +1,4 @@
+import java.util.Properties
 
 plugins {
     id("com.android.application")
@@ -20,9 +21,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+
+        val apiKey = Properties().apply {
+            load(project.rootProject.file("local.properties").inputStream())
+        }.getProperty("API_KEY") ?: ""
+
+        buildConfigField("String", "API_KEY", "\"$apiKey\"")
     }
 
     buildTypes {
@@ -42,6 +46,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"

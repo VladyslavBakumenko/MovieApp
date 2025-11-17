@@ -8,7 +8,7 @@ import com.example.movierating.domain.navigation.rememberNavigationState
 import com.example.movierating.presentation.actorDetailsScreen.ActorDetailsScreen
 import com.example.movierating.presentation.movieDetailsScreen.MovieDetailsScreen
 import com.example.movierating.presentation.movieScreen.MovieScreen
-import com.example.movierating.presentation.utils.SearchMovieScreen
+import com.example.movierating.presentation.searchMovieScreen.SearchMovieScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
