@@ -73,7 +73,7 @@ class MovieDetailsScreenViewModel @Inject constructor(
 
                     is SallyResponseResource.Success -> {
                         _state.update { prevState ->
-                            prevState.copy(cast = it.data.body()?.cast!!)
+                            prevState.copy(cast = it.data.body()?.cast.orEmpty())
                         }
                     }
                 }
