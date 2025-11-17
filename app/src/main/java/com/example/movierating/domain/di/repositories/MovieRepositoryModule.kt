@@ -1,8 +1,8 @@
 package com.example.movierating.domain.di.repositories
 
-import com.example.movierating.domain.network.apiRepositories.movesRequests.MovieApiRepository
-import com.example.movierating.domain.network.apiRepositories.movesRequests.MovieApiRepositoryImpl
-import com.example.movierating.domain.network.apiRepositories.movesRequests.MovieApiService
+import com.example.movierating.domain.network.apiRepository.MovieApiRepository
+import com.example.movierating.data.repository.MovieApiRepositoryImpl
+import com.example.movierating.domain.network.apiRepository.MovieApiService
 import com.example.movierating.domain.network.paging.MoviePagingSource
 import dagger.Module
 import dagger.Provides

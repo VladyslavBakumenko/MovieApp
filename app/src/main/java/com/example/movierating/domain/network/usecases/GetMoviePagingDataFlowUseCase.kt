@@ -2,7 +2,7 @@ package com.example.movierating.domain.network.usecases
 
 import androidx.paging.PagingData
 import com.example.movierating.data.restModels.Movie
-import com.example.movierating.domain.network.apiRepositories.movesRequests.MovieApiRepository
+import com.example.movierating.domain.network.apiRepository.MovieApiRepository
 import com.example.movierating.domain.network.paging.MoviePagingSourceRequestType
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

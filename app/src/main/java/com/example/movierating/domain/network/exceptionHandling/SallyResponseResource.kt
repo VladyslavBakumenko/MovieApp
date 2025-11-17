@@ -1,4 +1,4 @@
-package com.example.movierating.domain.network.exceptionHendling
+package com.example.movierating.domain.network.exceptionHandling
 
 sealed interface SallyResponseResource<out T> {
     data class Success<T>(val data: T) : SallyResponseResource<T>

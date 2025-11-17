@@ -1,6 +1,5 @@
 package com.example.movierating.domain.di.network
 
-import androidx.compose.material3.ModalBottomSheetDefaults.properties
 import com.example.movierating.BuildConfig
 import dagger.Module
 import dagger.Provides

@@ -1,4 +1,4 @@
-package com.example.movierating.domain.network.apiRepositories.movesRequests
+package com.example.movierating.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -9,7 +9,9 @@ import com.example.movierating.data.restModels.movieCreditsResponse.MovieCredits
 import com.example.movierating.data.restModels.movieVideoDataResponse.MovieVideoDataResponse
 import com.example.movierating.data.restModels.personDetailsResponse.PersonDetailsResponse
 import com.example.movierating.data.restModels.profileImagesResponse.ProfileImagesResponse
-import com.example.movierating.domain.network.exceptionHendling.SallyResponseResource
+import com.example.movierating.domain.network.apiRepository.MovieApiRepository
+import com.example.movierating.domain.network.apiRepository.MovieApiService
+import com.example.movierating.domain.network.exceptionHandling.SallyResponseResource
 import com.example.movierating.domain.network.paging.MoviePagingSource
 import com.example.movierating.domain.network.paging.MoviePagingSourceRequestType
 import kotlinx.coroutines.flow.Flow

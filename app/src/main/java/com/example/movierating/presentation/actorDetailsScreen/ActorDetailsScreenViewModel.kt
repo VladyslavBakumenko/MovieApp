@@ -2,7 +2,7 @@ package com.example.movierating.presentation.actorDetailsScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movierating.domain.network.exceptionHendling.SallyResponseResource
+import com.example.movierating.domain.network.exceptionHandling.SallyResponseResource
 import com.example.movierating.domain.network.usecases.GetPersonDetailsUseCase
 import com.example.movierating.domain.network.usecases.GetPersonImagesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
