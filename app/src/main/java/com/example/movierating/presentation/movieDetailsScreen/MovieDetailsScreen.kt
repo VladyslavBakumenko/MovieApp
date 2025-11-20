@@ -60,9 +60,9 @@ fun MovieDetailsScreen(
     val state by viewModel.state.collectAsState()
 
     LaunchedEffect(key1 = Unit, block = {
-        viewModel.getMoviePagingDataFlow(movie.id)
-        viewModel.getMovieVideoData(movie.id)
-        viewModel.getMovieCredits(movie.id)
+        viewModel.onIntent(MovieDetailsIntent.LoadSimilarMovies(movie.id))
+        viewModel.onIntent(MovieDetailsIntent.LoadMovieVideos(movie.id))
+        viewModel.onIntent(MovieDetailsIntent.LoadMovieCredits(movie.id))
     })
 
     Box(

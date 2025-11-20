@@ -4,6 +4,8 @@ import com.example.movierating.data.restModels.personDetailsResponse.PersonDetai
 import com.example.movierating.data.restModels.profileImagesResponse.ProfileImageInfo
 
 data class ActorDetailsScreenState(
+    val isLoading: Boolean = false,
     val profileDetailsResponse: PersonDetailsResponse? = null,
-    val profileImageInfoList: List<ProfileImageInfo> = listOf()
+    val profileImageInfoList: List<ProfileImageInfo> = emptyList(),
+    val error: String? = null
 )

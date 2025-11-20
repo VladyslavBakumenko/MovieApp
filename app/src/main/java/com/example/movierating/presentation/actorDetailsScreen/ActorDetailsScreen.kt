@@ -1,5 +1,6 @@
 package com.example.movierating.presentation.actorDetailsScreen
 
+import android.R.attr.text
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -54,61 +56,98 @@ fun ActorDetailsScreen(
     val state by viewModel.state.collectAsState()
 
     LaunchedEffect(key1 = Unit, block = {
-        viewModel.getActorDetails(actor.id)
-        viewModel.getActorImages(actor.id)
+        viewModel.onIntent(ActorDetailsIntent.LoadActorDetails(actor.id))
+        viewModel.onIntent(ActorDetailsIntent.LoadActorImages(actor.id))
     })
 
-    Scaffold(modifier = Modifier.background(Color.Black), topBar = {
-        CenterAlignedTopAppBar(
-            title = {
-                Text(text = actor.name)
-            },
-            navigationIcon = {
-                IconButton(onClick = {
-                    backPressedClickListener()
-                }) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBackIosNew,
-                        contentDescription = null
-                    )
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black),
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = { Text(text = actor.name, color = Color.White) },
+                navigationIcon = {
+                    IconButton(onClick = backPressedClickListener) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBackIosNew,
+                            contentDescription = null,
+                            tint = Color.White
+                        )
+                    }
                 }
-            }
-        )
-    }) {
-        Box(
-            modifier = Modifier.padding(
-                top = it.calculateTopPadding(),
-                start = 8.dp,
-                end = 8.dp
             )
+        }
+    ) { padding ->
+        if (state.isLoading) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Loading",
+                    color = Color.Red,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+
+        if (state.error != null) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Error: ${state.error}",
+                    color = Color.Red,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(
+                    top = padding.calculateTopPadding(),
+                    start = 8.dp,
+                    end = 8.dp
+                )
         ) {
-            LazyColumn {
-                item { ActorImageHorizontalPager(state.profileImageInfoList) }
-                item {
-                    Text(
-                        text = stringResource(id = R.string.biography_text),
-                        style = TextStyle(
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.Black
-                        ),
-                    )
-                }
-                item {
-                    Text(
-                        text = state.profileDetailsResponse?.biography ?: "No biography available",
-                        style = TextStyle(
-                            fontSize = 16.sp,
-                            color = Color.Gray
-                        ),
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .fillMaxWidth()
-                    )
-                }
-                item {
-                    Spacer(modifier = Modifier.size(16.dp))
-                }
+            item {
+                ActorImageHorizontalPager(state.profileImageInfoList)
+            }
+
+            item {
+                Text(
+                    text = stringResource(id = R.string.biography_text),
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    ),
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+            }
+
+            item {
+                Text(
+                    text = state.profileDetailsResponse?.biography
+                        ?: "No biography available",
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        color = Color.Gray
+                    ),
+                    modifier = Modifier
+                        .padding(bottom = 16.dp)
+                        .fillMaxWidth()
+                )
             }
         }
     }

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -55,15 +56,11 @@ fun SearchMovieScreen(
 
         Column {
             SearchMovieTextField(paddingValues, state.searchedMovieTextState) {
-                viewModel.changeState(it)
+                viewModel.onIntent(SearchMovieIntent.OnSearchTextChanged(it))
             }
             Spacer(Modifier.size(16.dp))
-            AllMoviesListScreen(pagingMoviesFlow = state.movieFlow, startMovieDetailsListener = {
+            AllMoviesListScreen(startMovieDetailsListener = {
                 startMovieDetailsListener(it)
-            }, firstPageLoadingListener = {
-                viewModel.changeLoadingState(true)
-            }, firstPageLoadingSuccessListener = {
-                viewModel.changeLoadingState(false)
             })
         }
     }, topBar = {
@@ -77,7 +74,7 @@ fun SearchMovieScreen(
             navigationIcon = {
                 IconButton(onClick = { onBackPressedListener() }) {
                     Icon(
-                        imageVector = Icons.Filled.ArrowBack,
+                        imageVector = Icons.Filled.ArrowBackIosNew,
                         contentDescription = null
                     )
                 }
@@ -120,4 +117,3 @@ fun SearchMovieTextField(
         maxLines = 1
     )
 }
-

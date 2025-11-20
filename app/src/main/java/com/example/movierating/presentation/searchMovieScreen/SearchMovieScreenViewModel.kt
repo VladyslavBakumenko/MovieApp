@@ -22,13 +22,20 @@ class SearchMovieScreenViewModel @Inject constructor(
     private val _state = MutableStateFlow(SearchMovieScreenState.getInstance(getMovieList()))
     val state = _state.asStateFlow()
 
-    fun changeState(text: String) {
+    fun onIntent(intent: SearchMovieIntent) {
+        when (intent) {
+            is SearchMovieIntent.OnSearchTextChanged -> changeSearchedMovieTextState(intent.text)
+            is SearchMovieIntent.OnFirstPageLoadingState -> changeIsLoadingMovieState(intent.isLoading)
+        }
+    }
+
+    private fun changeSearchedMovieTextState(text: String) {
         _state.update {
             it.copy(searchedMovieTextState = text, movieFlow = getMovieList(text))
         }
     }
 
-    fun changeLoadingState(isLoadingMovies: Boolean) {
+    private fun changeIsLoadingMovieState(isLoadingMovies: Boolean) {
         _state.update {
             it.copy(isLoadingMovies = isLoadingMovies)
         }

@@ -25,19 +25,27 @@ class MovieDetailsScreenViewModel @Inject constructor(
     private val _state = MutableStateFlow(MovieDetailsScreenState())
     val state = _state.asStateFlow()
 
-    fun getMoviePagingDataFlow(movieId: Int) {
+    fun onIntent(movieDetailsIntent: MovieDetailsIntent) {
+        when (movieDetailsIntent) {
+            is MovieDetailsIntent.LoadMovieCredits -> getMovieCredits(movieDetailsIntent.movieId)
+            is MovieDetailsIntent.LoadMovieVideos -> getMovieVideoData(movieDetailsIntent.movieId)
+            is MovieDetailsIntent.LoadSimilarMovies -> getMoviePagingDataFlow(movieDetailsIntent.movieId)
+        }
+    }
+
+    private fun getMoviePagingDataFlow(movieId: Int) {
         _state.update {
             it.copy(
                 similarMovieFlow =
-                getMoviePagingDataFlowUseCase.getMoviePagingDataFlow(
-                    MoviePagingSourceRequestType.GET_SIMILAR,
-                    movieId = movieId
-                )
+                    getMoviePagingDataFlowUseCase.getMoviePagingDataFlow(
+                        MoviePagingSourceRequestType.GET_SIMILAR,
+                        movieId = movieId
+                    )
             )
         }
     }
 
-    fun getMovieVideoData(movieId: Int) {
+    private fun getMovieVideoData(movieId: Int) {
         viewModelScope.launch {
             getMovieVideoDataUseCase.invoke(movieId).collectLatest {
                 when (it) {
@@ -59,7 +67,7 @@ class MovieDetailsScreenViewModel @Inject constructor(
         }
     }
 
-    fun getMovieCredits(movieId: Int) {
+    private fun getMovieCredits(movieId: Int) {
         viewModelScope.launch {
             getMovieCreditsUseCase.invoke(movieId).collectLatest {
                 when (it) {
